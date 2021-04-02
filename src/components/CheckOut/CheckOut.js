@@ -6,6 +6,8 @@ const CheckOut = () => {
     const { id } = useParams();
     const [product, setProduct] = useState([]);
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const {name, brand, price} = product;
+    const newProduct = {name, brand, price};
     const {displayName, email} = loggedInUser;
     const userInfo = {displayName, email};
     console.log(loggedInUser, displayName, email);
@@ -18,7 +20,7 @@ const CheckOut = () => {
     }, [])
 
     const handleCheckOut = () => {
-        const newOrder = {...userInfo, ...product};
+        const newOrder = {...userInfo, ...newProduct};
         fetch('https://cherry-crumble-46990.herokuapp.com/addOrder', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
